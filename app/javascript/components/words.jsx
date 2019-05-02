@@ -1,4 +1,6 @@
 import React from 'react';
+import WordList from './word-list';
+import WordSearch from './word-search';
 
 export default class Words extends React.Component {
 
@@ -18,7 +20,8 @@ export default class Words extends React.Component {
   render = () => {
     return(
       <div>
-      	This is the words page
+        <WordSearch onSearch={this.getWords} />
+        <WordList words={this.state.words} />
       </div>
     );
   };
