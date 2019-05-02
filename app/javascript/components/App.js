@@ -1,24 +1,16 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Words from './words';
+import Home from './home';
 
 export default class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      words: []
-    };
-  }
-
-  getWords = (search) => {
-    fetch(`/api/v1/words?search=${search}`)
-      .then((response) => {return response.json()})
-      .then((words) => {this.setState({ words: words }) });
-  };
-
   render = () => {
     return(
       <div>
-        I am here
+      	<Switch>
+      	  <Route exact path="/" component={Home} />
+      	  <Route exact path="/words" component={Words} />
+      	</Switch>
       </div>
     );
   };
