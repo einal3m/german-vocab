@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class WordRow extends React.Component {
   onEdit = () => {
@@ -9,9 +10,7 @@ export default class WordRow extends React.Component {
     return (
       <div>
         {this.props.word.german}
-        <button className="button is-info" onClick={this.onEdit}>
-          Edit
-        </button>
+        <Link to={`/edit/${this.props.word.id}`}>Edit</Link>
       </div>
     );
   };

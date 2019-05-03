@@ -1,5 +1,5 @@
 import React from 'react';
-import Word from './word-row';
+import WordRow from './word-row';
 
 export default class WordList extends React.Component {
     
