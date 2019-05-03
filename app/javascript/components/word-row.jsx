@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Word extends React.Component {
+export default class WordRow extends React.Component {
   onEdit = () => {
 
   };

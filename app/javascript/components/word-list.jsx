@@ -1,11 +1,11 @@
 import React from 'react';
-import Word from './word';
+import Word from './word-row';
 
 export default class WordList extends React.Component {
     
   renderWord = (word) => {
     return (
-      <Word key={word.id} word={word} />
+      <WordRow key={word.id} word={word} />
     );  
   };
 
