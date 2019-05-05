@@ -10,18 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_02_103753) do
+ActiveRecord::Schema.define(version: 2019_05_05_035324) do
 
   create_table "progresses", force: :cascade do |t|
     t.integer "user_id"
     t.integer "word_id"
     t.boolean "seen"
-    t.boolean "translation"
+    t.string "translation"
     t.text "example"
     t.integer "count"
     t.boolean "learnt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "word_id"], name: "index_progresses_on_user_id_and_word_id", unique: true
     t.index ["user_id"], name: "index_progresses_on_user_id"
     t.index ["word_id"], name: "index_progresses_on_word_id"
   end

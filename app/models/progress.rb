@@ -10,6 +10,8 @@ class Progress < ApplicationRecord
   belongs_to :user
   belongs_to :word
 
+  validates :user_id, uniqueness: { scope: :word_id, message: "should only have one progress per word" }
+
   def self.search(word_id, user_id)
   	Progress.where(word_id: word_id, user_id: user_id)
   end
