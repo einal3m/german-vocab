@@ -5,8 +5,8 @@ export default class Home extends React.Component {
   render = () => {
     return(
       <div>
-      	This is the home page
-      	<Link to={`/words`}>Word list</Link>
+      	This is the home page.
+        Add some instructions here.
       </div>
     );
   };
