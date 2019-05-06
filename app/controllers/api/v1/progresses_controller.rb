@@ -1,6 +1,10 @@
 class Api::V1::ProgressesController < ApplicationController
   def index
-    render json: Progress.search(index_params[:word_id], 1)
+    if index_params[:word_id].nil?
+      render json: Progress.where(user_id: index_params[:user_id])
+    else
+      render json: Progress.search(index_params[:word_id], 1)
+    end
   end
 
   def create
@@ -30,6 +34,6 @@ class Api::V1::ProgressesController < ApplicationController
   end
 
   def index_params
-  	params.permit(:word_id)
+  	params.permit(:user_id, :word_id)
   end
 end

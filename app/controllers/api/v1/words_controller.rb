@@ -1,6 +1,10 @@
 class Api::V1::WordsController < ApplicationController
   def index
-    render json: Word.search(index_params[:search])
+    if index_params[:search].nil?
+      render json: Word.all
+    else
+      render json: Word.search(index_params[:search])
+    end
   end
 
   def show

@@ -13,6 +13,7 @@ export default class ReviewApp extends React.Component {
         <p>Learn article only, or word only</p>
         <p>Learn plurals.</p>
 
+        <p>if you get a word right, count goes up by one, if you get it wrong, count goes down by one. When you get to 6(?) you have learnt it.</p>
       </div>
     );
   };

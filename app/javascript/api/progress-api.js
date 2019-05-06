@@ -5,6 +5,12 @@ export const getProgress = (word_id, callback) => {
     .then((progress) => callback(progress[0] || defaultProgress(word_id)));
 };
 
+export const getAllProgresses = (callback) => {
+  fetch(`/api/v1/progresses?user_id=1`)
+    .then((response) => {return response.json()})
+    .then((progresses) => callback(progresses));
+};
+
 const defaultProgress = (word_id) => {
   return {
     word_id: word_id,

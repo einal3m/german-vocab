@@ -5,6 +5,12 @@ export const getWords = (searchText, callback) => {
     .then((words) => callback(words));
 };
 
+export const getAllWords = (callback) => {
+  fetch(`/api/v1/words`)
+    .then((response) => {return response.json()})
+    .then((words) => callback(words));
+};
+
 export const getWord = (id, callback) => {
   fetch(`/api/v1/words/${id}`)
     .then((response) => {return response.json()})
