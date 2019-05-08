@@ -2,6 +2,7 @@ import React from 'react';
 import Spinner from '../common/spinner';
 import { getAllWords } from '../../api/word-api';
 import { getAllProgresses } from '../../api/progress-api';
+import { Link } from 'react-router-dom';
 
 export default class ProgressApp extends React.Component {
   constructor(props) {
@@ -20,10 +21,6 @@ export default class ProgressApp extends React.Component {
 
   getWordForProgress = (progress) => {
     return this.state.words.filter(word => word.id == progress.word_id)[0];
-  };
-
-  startReview = () => {
-
   };
 
   renderRows = () => {
@@ -60,7 +57,7 @@ export default class ProgressApp extends React.Component {
   renderReviewNav = () => {
     return (
       <div>
-        <button onClick={this.startReview}>Review</button>
+        <Link className="nav-link" to={`/review`}>Review</Link>
       </div>
     );
   };
