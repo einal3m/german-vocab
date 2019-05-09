@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   namespace :api do
-	namespace :v1 do
-	  resources :users, only: [:index, :create]
+    namespace :v1 do
+      resources :users, only: [:index, :create]
       resources :words, only: [:index, :show]
-      resources :progresses, only: [:index, :create, :update]
+      resources :progresses, only: [:index, :create, :update] do
+        resources :reviews, only: [:create]
+      end
     end
   end
 

@@ -35,10 +35,7 @@ export default class EditApp extends React.Component {
 
   toggleLearnt = (event) => {
     const progress = this.state.progress;
-    console.log('current learnt', progress.learnt);
-
     progress.learnt = !progress.learnt;
-    console.log('new learnt', progress.learnt);
 
     this.setState({ progress: progress });
   };
@@ -70,7 +67,7 @@ export default class EditApp extends React.Component {
           <div className="form-group row">
             <label className="col-sm-2 col-form-label" htmlFor="inputTranslation">Translation</label>
             <div className="col-sm-10">
-              <input 
+              <input
                 type="text" 
                 className="form-control" 
                 id="inputTranslation" 
@@ -84,12 +81,12 @@ export default class EditApp extends React.Component {
           <div className="form-group row">
             <label className="col-sm-2 col-form-label" htmlFor="inputSentence">Sentence</label>
             <div className="col-sm-10">
-              <input 
-                type="text" 
-                className="form-control" 
-                id="inputSentence" 
+              <input
+                type="text"
+                className="form-control"
+                id="inputSentence"
                 value={this.state.progress.example}
-                aria-describedby="sentenceHelp" 
+                aria-describedby="sentenceHelp"
                 onChange={this.onChangeExample}
               />
               <small id="sentenceHelp" className="form-text text-muted">Make up a sentence using the word '{this.state.word.german}'.</small>

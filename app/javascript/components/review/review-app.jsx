@@ -2,6 +2,7 @@ import React from 'react';
 import Spinner from '../common/spinner';
 import { getAllWords } from '../../api/word-api';
 import { getAllProgresses } from '../../api/progress-api';
+import { postReview } from '../../api/review-api';
 
 export default class ReviewApp extends React.Component {
   constructor(props) {
@@ -25,16 +26,14 @@ export default class ReviewApp extends React.Component {
   onTranslated = (event) => {
     event.preventDefault();
 
-    if (this.state.review != this.getWordForProgress().german) {
+    const wrong = this.state.review != this.getWordForProgress().german;
+    if (wrong) {
       this.setState({ wrong: true });
     } else {
       this.setState({ correct: true });
     }
 
-    // save the review (date, correct/wrong)
-    // check if it's correct
-    // move to the next if it is, 
-    // alert if it isn't
+    postReview(this.state.progresses[this.state.index].id, { correct: !wrong });
   };
 
   onNextWord = (event) => {

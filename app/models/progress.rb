@@ -9,6 +9,7 @@ class Progress < ApplicationRecord
 
   belongs_to :user
   belongs_to :word
+  has_many :reviews
 
   validates :user_id, uniqueness: { scope: :word_id, message: "should only have one progress per word" }
 
