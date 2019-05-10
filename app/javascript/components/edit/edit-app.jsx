@@ -1,6 +1,6 @@
 import React from 'react';
 import { getWord } from '../../api/word-api';
-import { getProgress, saveProgress } from '../../api/progress-api';
+import { getTranslation, saveTranslation } from '../../api/translation-api';
 import Spinner from '../common/spinner';
 import './edit-app.css';
 
@@ -12,41 +12,42 @@ export default class EditApp extends React.Component {
 
   componentDidMount() {
     getWord(this.props.match.params.id, (word) => {
-      this.setState({ word: word, loading: !this.state.progress });
+      this.setState({ word: word, loading: !this.state.translation });
     });
-    getProgress(this.props.match.params.id, (progress) => {
-      this.setState({ progress: progress, loading: !this.state.word })
+    getTranslation(this.props.match.params.id, (translation) => {
+      this.setState({ translation: translation, loading: !this.state.word })
     });
   }
 
   onChangeTranslation = (event) => {
-    const progress = this.state.progress;
-    progress.translation = event.target.value;
+    const translation = this.state.translation;
+    translation.translation = event.target.value;
 
-    this.setState({ progress: progress });
+    this.setState({ translation: translation });
   };
 
   onChangeExample = (event) => {
-    const progress = this.state.progress;
-    progress.example = event.target.value;
+    const translation = this.state.translation;
+    translation.example = event.target.value;
 
-    this.setState({ progress: progress });
+    this.setState({ translation: translation });
   };
 
   toggleLearnt = (event) => {
-    const progress = this.state.progress;
-    progress.learnt = !progress.learnt;
+    const translation = this.state.translation;
+    translation.learnt = !translation.learnt;
 
-    this.setState({ progress: progress });
+    this.setState({ translation: translation });
   };
 
   onSubmit = (event) => {
     event.preventDefault();
     
-    const progress = this.state.progress;
-    progress.seen = true;
+    const translation = this.state.translation;
+    translation.seen = true;
 
-    saveProgress(progress);
+    console.log('translation', translation);
+    saveTranslation(translation);
   };
 
   renderHelpLink() {
@@ -60,6 +61,8 @@ export default class EditApp extends React.Component {
       return <Spinner />;
     }
 
+    console.log(this.state.translation);
+
     return (
       <div>
         <div className='word german'>{this.state.word.german}</div>
@@ -71,7 +74,7 @@ export default class EditApp extends React.Component {
                 type="text" 
                 className="form-control" 
                 id="inputTranslation" 
-                value={this.state.progress.translation}
+                value={this.state.translation.translation}
                 aria-describedby="translationHelp" 
                 onChange={this.onChangeTranslation}
               />
@@ -85,7 +88,7 @@ export default class EditApp extends React.Component {
                 type="text"
                 className="form-control"
                 id="inputSentence"
-                value={this.state.progress.example}
+                value={this.state.translation.example}
                 aria-describedby="sentenceHelp"
                 onChange={this.onChangeExample}
               />
@@ -98,7 +101,7 @@ export default class EditApp extends React.Component {
                 type="checkbox" 
                 className="form-check-input" 
                 id="checkLearnt" 
-                checked={this.state.progress.learnt}
+                checked={this.state.translation.learnt}
                 aria-describedby="learntHelp" 
                 onChange={this.toggleLearnt}
               />

@@ -1,6 +1,6 @@
 class Review < ApplicationRecord
-  # progress: foreign key
+  # translation: foreign key
   # correct: boolean
 
-  belongs_to :progress
+  belongs_to :translation
 end

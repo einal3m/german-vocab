@@ -1,5 +1,5 @@
 class User < ApplicationRecord
   # name: string
 
-  has_many :progresses
+  has_many :translations
 end

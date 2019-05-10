@@ -3,7 +3,7 @@ class Word < ApplicationRecord
   # level: string
   # category: string
 
-  has_many :progresses
+  has_many :translations
 
   def self.search(search)
   	Word.where('german LIKE ?', "%#{search}%")

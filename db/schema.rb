@@ -12,7 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2019_05_08_101751) do
 
-  create_table "progresses", force: :cascade do |t|
+  create_table "reviews", force: :cascade do |t|
+    t.boolean "correct"
+    t.integer "translation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["translation_id"], name: "index_reviews_on_translation_id"
+  end
+
+  create_table "translations", force: :cascade do |t|
     t.integer "user_id"
     t.integer "word_id"
     t.boolean "seen"
@@ -22,17 +30,9 @@ ActiveRecord::Schema.define(version: 2019_05_08_101751) do
     t.boolean "learnt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "word_id"], name: "index_progresses_on_user_id_and_word_id", unique: true
-    t.index ["user_id"], name: "index_progresses_on_user_id"
-    t.index ["word_id"], name: "index_progresses_on_word_id"
-  end
-
-  create_table "reviews", force: :cascade do |t|
-    t.boolean "correct"
-    t.integer "progress_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["progress_id"], name: "index_reviews_on_progress_id"
+    t.index ["user_id", "word_id"], name: "index_translations_on_user_id_and_word_id", unique: true
+    t.index ["user_id"], name: "index_translations_on_user_id"
+    t.index ["word_id"], name: "index_translations_on_word_id"
   end
 
   create_table "users", force: :cascade do |t|

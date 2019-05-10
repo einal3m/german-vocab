@@ -1,7 +1,7 @@
 import React from 'react';
 import Spinner from '../common/spinner';
 import { getAllWords } from '../../api/word-api';
-import { getAllProgresses } from '../../api/progress-api';
+import { getAllTranslations } from '../../api/translation-api';
 import { postReview } from '../../api/review-api';
 
 export default class ReviewApp extends React.Component {
@@ -11,11 +11,11 @@ export default class ReviewApp extends React.Component {
   }
 
   componentDidMount() {
-    getAllProgresses((progresses) => {
-      this.setState({ progresses: progresses, loading: !this.state.words })
+    getAllTranslations((translations) => {
+      this.setState({ translations: translations, loading: !this.state.words })
     });
     getAllWords((words) => {
-      this.setState({ words: words, loading: !this.state.progresses })
+      this.setState({ words: words, loading: !this.state.translations })
     });
   }
 
@@ -26,28 +26,28 @@ export default class ReviewApp extends React.Component {
   onTranslated = (event) => {
     event.preventDefault();
 
-    const wrong = this.state.review != this.getWordForProgress().german;
+    const wrong = this.state.review != this.getWordForTranslation().german;
     if (wrong) {
       this.setState({ wrong: true });
     } else {
       this.setState({ correct: true });
     }
 
-    postReview(this.state.progresses[this.state.index].id, { correct: !wrong });
+    postReview(this.state.translations[this.state.index].id, { correct: !wrong });
   };
 
   onNextWord = (event) => {
     event.preventDefault();
     let nextIndex = this.state.index + 1;
-    if (nextIndex == this.state.progresses.length) {
+    if (nextIndex == this.state.translations.length) {
       this.setState({ finished: true });
     } else {
       this.setState({ wrong: false, correct: false, review: '', index: this.state.index + 1})
     }
   }
 
-  getWordForProgress = () => {
-    return this.state.words.filter(word => word.id == this.state.progresses[this.state.index].word_id)[0];
+  getWordForTranslation = () => {
+    return this.state.words.filter(word => word.id == this.state.translations[this.state.index].word_id)[0];
   };
 
   renderFinished = () => {
@@ -60,8 +60,8 @@ export default class ReviewApp extends React.Component {
     return (
       <div className="alert alert-danger" role="alert">
         <div>You are wrong!</div>
-        <div>{this.getWordForProgress().german}</div>
-        <div>{this.state.progresses[this.state.index].example}</div>
+        <div>{this.getWordForTranslation().german}</div>
+        <div>{this.state.translations[this.state.index].example}</div>
       </div>
     );
   };
@@ -70,7 +70,7 @@ export default class ReviewApp extends React.Component {
     return (
       <div className="alert alert-success" role="alert">
         <div>You are correct!</div>
-        <div>{this.state.progresses[this.state.index].example}</div>
+        <div>{this.state.translations[this.state.index].example}</div>
       </div>
     );
   };
@@ -84,9 +84,12 @@ export default class ReviewApp extends React.Component {
   }
 
   renderReview = () => {
+    console.log(this.state);
+    console.log(this.state.translations[this.state.index]);
+    
     return (
       <div>
-        <div className='word english'>{this.state.progresses[this.state.index].translation}</div>
+        <div className='word english'>{this.state.translations[this.state.index].translation}</div>
         {this.state.wrong && this.renderYouAreWrong()}
         {this.state.correct && this.renderYouAreCorrect()}
         <form>
