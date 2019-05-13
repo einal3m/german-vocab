@@ -7,6 +7,33 @@ class Api::V1::TranslationsController < ApplicationController
     end
   end
 
+  def review
+    translations = Translation.where(learnt: false).order("RANDOM()").limit(10).map do |translation|
+      {
+        id: translation.id,
+        german: translation.word.german,
+        translation: translation.translation,
+        example: translation.example,
+      }
+    end
+
+    render json: translations
+  end
+
+  def progress
+    progress = Translation.where(user_id: index_params[:user_id]).map do |translation|
+      {
+        id: translation.id,
+        german: translation.word.german,
+        translation: translation.translation,
+        learnt: translation.learnt,
+        level: translation.level,
+      }
+    end
+
+    render json: progress
+  end
+
   def create
     translation = Translation.new(translation_params)
   
@@ -19,12 +46,6 @@ class Api::V1::TranslationsController < ApplicationController
 
   def update
     translation = Translation.find(translation_params[:id])
-
-    puts '************************'
-    puts 'update translation'
-    puts translation
-    puts translation_params
-    puts '************************'
 
     if translation.update_attributes(translation_params)
       render :json => translation

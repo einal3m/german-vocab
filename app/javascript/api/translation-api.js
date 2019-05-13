@@ -23,6 +23,18 @@ const defaultTranslation = (word_id) => {
   };
 };
 
+export const getProgress = (callback) => {
+  fetch(`/api/v1/translations/progress?user_id=1`)
+    .then((response) => {return response.json()})
+    .then((translations) => callback(translations));
+};
+
+export const getTranslationsForReview = (callback) => {
+  fetch(`/api/v1/translations/review?user_id=1`)
+    .then((response) => {return response.json()})
+    .then((translations) => callback(translations));
+};
+
 export const saveTranslation = (translation) => {
   if (translation.id) {
     putTranslation(translation);

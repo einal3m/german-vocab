@@ -16,4 +16,16 @@ class Translation < ApplicationRecord
   def self.search(word_id, user_id)
   	Translation.where(word_id: word_id, user_id: user_id)
   end
+
+  def level
+    level = 1
+    reviews.each do |review|
+      if review.correct
+        level += 1 unless level == 6
+      else
+        level -= 1 unless level == 1
+      end
+    end
+    level
+  end
 end

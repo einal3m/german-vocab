@@ -7,6 +7,10 @@ Rails.application.routes.draw do
       resources :words, only: [:index, :show]
       resources :translations, only: [:index, :create, :update] do
         resources :reviews, only: [:create]
+        collection do
+          get 'progress'
+          get 'review'
+        end
       end
     end
   end

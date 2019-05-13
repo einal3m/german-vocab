@@ -1,7 +1,9 @@
 import React from 'react';
 import Spinner from '../common/spinner';
+import Gauge from '../common/gauge';
+import YesNo from './yes-no.jsx';
 import { getAllWords } from '../../api/word-api';
-import { getAllTranslations } from '../../api/translation-api';
+import { getProgress } from '../../api/translation-api';
 import { Link } from 'react-router-dom';
 
 export default class ProgressApp extends React.Component {
@@ -11,7 +13,7 @@ export default class ProgressApp extends React.Component {
   }
 
   componentDidMount() {
-    getAllTranslations((translations) => {
+    getProgress((translations) => {
       this.setState({ translations: translations, loading: !this.state.words })
     });
     getAllWords((words) => {
@@ -27,10 +29,9 @@ export default class ProgressApp extends React.Component {
     return this.state.translations.map(translation => {
       return (
         <tr key={translation.id}>  
-          <td>{this.getWordForTranslation(translation).german}</td>
-          <td>{translation.translation}</td>
-          <td>{translation.level}</td>
-          <td>{translation.learnt}</td>
+          <td>{translation.german}</td>
+          <td><Gauge level={translation.level} /></td>
+          <td><YesNo yes={translation.learnt} /></td>
         </tr>
       );
     });
@@ -42,7 +43,6 @@ export default class ProgressApp extends React.Component {
         <thead>
           <tr>
             <th scope="col">german</th>
-            <th scope="col">english</th>
             <th scope="col">level</th>
             <th scope="col">learnt</th>
           </tr>

@@ -1,0 +1,15 @@
+.dot {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 2px;
+}
+
+.dot.hollow {
+  border: 1px solid #00bdaa;
+}
+
+.dot.filled {
+  background-color: #00bdaa;
+}

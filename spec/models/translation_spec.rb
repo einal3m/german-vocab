@@ -24,4 +24,12 @@ RSpec.describe Translation, type: :model do
       expect(result).to eq([translation])
     end
   end
+
+  describe '#level' do
+    it 'defaults to 1' do
+      translation = Translation.create
+
+      expect(translation.level).to eq(1)
+    end
+  end
 end
