@@ -24,6 +24,7 @@ class Api::V1::TranslationsController < ApplicationController
     progress = Translation.where(user_id: index_params[:user_id]).map do |translation|
       {
         id: translation.id,
+        word_id: translation.word_id,
         german: translation.word.german,
         translation: translation.translation,
         learnt: translation.learnt,

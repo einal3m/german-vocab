@@ -11,7 +11,7 @@ import ProgressApp from './progress/progress-app';
 export default class App extends React.Component {
   render = () => {
     return(
-      <div className='container'>
+      <div className="container">
         <Navbar />
       	<Switch>
       	  <Route exact path="/" component={Home} />

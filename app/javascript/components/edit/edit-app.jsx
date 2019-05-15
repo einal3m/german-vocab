@@ -46,7 +46,6 @@ export default class EditApp extends React.Component {
     const translation = this.state.translation;
     translation.seen = true;
 
-    console.log('translation', translation);
     saveTranslation(translation);
   };
 
@@ -60,8 +59,6 @@ export default class EditApp extends React.Component {
     if (this.state.loading) {
       return <Spinner />;
     }
-
-    console.log(this.state.translation);
 
     return (
       <div>

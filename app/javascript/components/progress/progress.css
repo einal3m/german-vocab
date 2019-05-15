@@ -1,0 +1,17 @@
+.progress tr {
+  cursor: pointer;
+}
+
+th.german {
+  width: 50%;
+}
+
+th.level, td.level {
+  width: 25%;
+  text-align: center;
+}
+
+th.learnt, td.learnt {
+  width: 25%;
+  text-align: center;
+}

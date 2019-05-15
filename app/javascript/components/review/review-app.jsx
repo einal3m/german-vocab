@@ -95,9 +95,6 @@ export default class ReviewApp extends React.Component {
   }
 
   renderReview = () => {
-    console.log(this.state);
-    console.log(this.state.currentTranslation);
-    
     return (
       <div>
         <div className='word english'>{this.state.currentTranslation.translation}</div>
