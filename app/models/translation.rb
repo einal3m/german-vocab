@@ -11,6 +11,9 @@ class Translation < ApplicationRecord
   belongs_to :word
   has_many :reviews
 
+  MIN_LEVEL = 0
+  MAX_LEVEL = 5
+
   validates :user_id, uniqueness: { scope: :word_id, message: "should only have one translation per word" }
 
   def self.search(word_id, user_id)
@@ -18,14 +21,22 @@ class Translation < ApplicationRecord
   end
 
   def level
-    level = 1
+    level = MIN_LEVEL
     reviews.each do |review|
       if review.correct
-        level += 1 unless level == 6
+        level += 1 unless level == MAX_LEVEL
       else
-        level -= 1 unless level == 1
+        level -= 1 unless level == MIN_LEVEL
       end
     end
     level
+  end
+
+  def last_review
+    reviews.last&.created_at
+  end
+
+  def review_count
+    reviews.count
   end
 end

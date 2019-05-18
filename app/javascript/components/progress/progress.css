@@ -1,17 +1,32 @@
-.progress tr {
-  cursor: pointer;
+.table .thead-dark th {
+  font-size: 12px;
+  background-color: #3d1860;
+  border-color: #643579;
+  vertical-align: middle;
+  padding: 5px 12px;
 }
 
-th.german {
-  width: 50%;
+td.german {
+  font-size: 16px;
 }
 
 th.level, td.level {
-  width: 25%;
   text-align: center;
 }
 
 th.learnt, td.learnt {
-  width: 25%;
+  width: 10%;
+  text-align: center;
+}
+
+th.last-review, td.last-review {
+  width: 15%;
+  text-align: center;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+th.review-count, td.review-count {
+  width: 10%;
   text-align: center;
 }

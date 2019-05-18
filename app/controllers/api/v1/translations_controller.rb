@@ -29,6 +29,8 @@ class Api::V1::TranslationsController < ApplicationController
         translation: translation.translation,
         learnt: translation.learnt,
         level: translation.level,
+        review_count: translation.review_count,
+        last_review: translation.last_review
       }
     end
 

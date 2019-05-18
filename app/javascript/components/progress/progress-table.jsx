@@ -4,11 +4,13 @@ import ProgressRow from './progress-row';
 const ProgressTable = (props) => {
   return (
     <table className="table table-hover">
-      <thead>
+      <thead className="thead-dark">
         <tr>
-          <th scope="col" className="german">german</th>
-          <th scope="col" className="level">level</th>
-          <th scope="col" className="learnt">learnt</th>
+          <th scope="col" className="german">GERMAN</th>
+          <th scope="col" className="level">LEVEL</th>
+          <th scope="col" className="review-count">NO. REVIEWS</th>
+          <th scope="col" className="last-review">LAST REVIEWED</th>
+          <th scope="col" className="learnt">LEARNT</th>
         </tr>
       </thead>
       <tbody>
