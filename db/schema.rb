@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_08_101751) do
+ActiveRecord::Schema.define(version: 2019_05_18_082018) do
 
   create_table "reviews", force: :cascade do |t|
     t.boolean "correct"
@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(version: 2019_05_08_101751) do
     t.string "translation"
     t.text "example"
     t.integer "count"
-    t.boolean "learnt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "known"
     t.index ["user_id", "word_id"], name: "index_translations_on_user_id_and_word_id", unique: true
     t.index ["user_id"], name: "index_translations_on_user_id"
     t.index ["word_id"], name: "index_translations_on_word_id"

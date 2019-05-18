@@ -8,14 +8,16 @@ class Api::V1::TranslationsController < ApplicationController
   end
 
   def review
-    translations = Translation.where(learnt: false).order("RANDOM()").limit(10).map do |translation|
+    translations = Translation.where(user_id: 1).reject do |translation|
+      translation.learnt
+    end.map do |translation|
       {
         id: translation.id,
         german: translation.word.german,
         translation: translation.translation,
         example: translation.example,
       }
-    end
+    end.sample(10)
 
     render json: translations
   end
@@ -60,7 +62,7 @@ class Api::V1::TranslationsController < ApplicationController
   private
 
   def translation_params
-    params.require(:translation).permit(:id, :word_id, :user_id, :translation, :example, :seen, :learnt, :count)
+    params.require(:translation).permit(:id, :word_id, :user_id, :translation, :example, :seen, :known, :count)
   end
 
   def index_params

@@ -18,7 +18,7 @@ const defaultTranslation = (word_id) => {
     translation: '',
     example: '',
     seen: false,
-    learnt: false,
+    known: false,
     count: 0,
   };
 };

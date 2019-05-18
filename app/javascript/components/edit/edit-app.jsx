@@ -33,9 +33,9 @@ export default class EditApp extends React.Component {
     this.setState({ translation: translation });
   };
 
-  toggleLearnt = (event) => {
+  toggleKnown = (event) => {
     const translation = this.state.translation;
-    translation.learnt = !translation.learnt;
+    translation.known = !translation.known;
 
     this.setState({ translation: translation });
   };
@@ -97,13 +97,13 @@ export default class EditApp extends React.Component {
               <input 
                 type="checkbox" 
                 className="form-check-input" 
-                id="checkLearnt" 
-                checked={this.state.translation.learnt}
-                aria-describedby="learntHelp" 
-                onChange={this.toggleLearnt}
+                id="checkKnown" 
+                checked={this.state.translation.known}
+                aria-describedby="knownHelp" 
+                onChange={this.toggleKnown}
               />
-              <label className="form-check-label" htmlFor="checkLearnt">I know this word well</label>
-              <small id="learntHelp" className="form-text text-muted">Tick this if you know this word well and you don't want it to appear in reviews.</small>
+              <label className="form-check-label" htmlFor="checkKnown">I know this word well</label>
+              <small id="knownHelp" className="form-text text-muted">Tick this if you know this word well and you don't want it to appear in reviews.</small>
             </div>
           </div>
           <button onClick={this.onSubmit} className="btn btn-primary">Save</button>

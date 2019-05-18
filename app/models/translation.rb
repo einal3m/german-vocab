@@ -5,7 +5,7 @@ class Translation < ApplicationRecord
   # translation: string
   # example: text
   # count: integer
-  # learnt: boolean
+  # known: boolean
 
   belongs_to :user
   belongs_to :word
@@ -21,6 +21,8 @@ class Translation < ApplicationRecord
   end
 
   def level
+    return MAX_LEVEL if known
+
     level = MIN_LEVEL
     reviews.each do |review|
       if review.correct
@@ -38,5 +40,9 @@ class Translation < ApplicationRecord
 
   def review_count
     reviews.count
+  end
+
+  def learnt
+    known || (level == MAX_LEVEL)
   end
 end

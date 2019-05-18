@@ -28,5 +28,6 @@ th.last-review, td.last-review {
 
 th.review-count, td.review-count {
   width: 10%;
+  font-size: 12px;
   text-align: center;
 }
