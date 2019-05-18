@@ -143,7 +143,9 @@ wohnen,A1,Verb
 wollen,A1,Verb
 zahlen,A1,Verb
 zeigen,A1,Verb
-acht,A1,Adjective
+acht,A1,Number
+achtzehn,A1,Number
+achtzig,A1,Number
 all,A1,Adjective
 alle,A1,Adjective
 alt,A1,Adjective
@@ -163,11 +165,12 @@ bunt,A1,Adjective
 chinesisch,A1,Adjective
 deutsch,A1,Adjective
 dreckig,A1,Adjective
-drei,A1,Adjective
-dreißig,A1,Adjective
+drei,A1,Number
+dreizehn,A1,Number
+dreißig,A1,Number
 dritte,A1,Adjective
 eilig,A1,Adjective
-ein,A1,Adjective
+eins,A1,Number
 einfach,A1,Adjective
 einig,A1,Adjective
 emotional,A1,Adjective
@@ -180,7 +183,9 @@ fertig,A1,Adjective
 frei,A1,Adjective
 fremd,A1,Adjective
 früh,A1,Adjective
-fünf,A1,Adjective
+fünf,A1,Number
+fünfzehn,A1,Number
+fünfzig,A1,Number
 fünfte,A1,Adjective
 gelb,A1,Adjective
 geöffnet,A1,Adjective
@@ -198,7 +203,8 @@ heiß,A1,Adjective
 hell,A1,Adjective
 herzlich,A1,Adjective
 hoch,A1,Adjective
-hundert,A1,Adjective
+hundert,A1,Number
+tausend,A1,Number
 international,A1,Adjective
 italienisch,A1,Adjective
 kalt,A1,Adjective
@@ -223,6 +229,9 @@ manche,A1,Adjective
 männlich,A1,Adjective
 möglich,A1,Adjective
 müde,A1,Adjective
+neun,A1,Number
+neunzehn,A1,Number
+neunzig,A1,Number
 neu,A1,Adjective
 orange,A1,Adjective
 pünktlich,A1,Adjective
@@ -237,18 +246,20 @@ schön,A1,Adjective
 schrecklich,A1,Adjective
 schwarz,A1,Adjective
 schwer,A1,Adjective
-sechs,A1,Adjective
+sechs,A1,Number
 sechste,A1,Adjective
-sechzig,A1,Adjective
+sechzehn,A1,Number
+sechzig,A1,Number
 stark,A1,Adjective
 teuer,A1,Adjective
 tragend,A1,Adjective
 verheiratet,A1,Adjective
 viel,A1,Adjective
-vier,A1,Adjective
+vier,A1,Number
 vierte,A1,Adjective
 viertel,A1,Adjective
-vierzig,A1,Adjective
+vierzehn,A1,Number
+vierzig,A1,Number
 voll,A1,Adjective
 weiblich,A1,Adjective
 weiß,A1,Adjective
@@ -257,9 +268,9 @@ wenig,A1,Adjective
 wichtig,A1,Adjective
 willkommen,A1,Adjective
 wunderbar,A1,Adjective
-zehn,A1,Adjective
-zwanzig,A1,Adjective
-zwei,A1,Adjective
+zehn,A1,Number
+zwanzig,A1,Number
+zwei,A1,Number
 zweite,A1,Adjective
 der Abend,A1,Noun
 der Abflug,A1,Noun
@@ -357,7 +368,7 @@ der Eingang,A1,Noun
 die Einladung,A1,Noun
 der Eintritt,A1,Noun
 das Einzelzimmer,A1,Noun
-die Elf,A1,Noun
+elf,A1,Number
 die Eltern,A1,Noun
 das Ende,A1,Noun
 das Englisch,A1,Noun
@@ -576,7 +587,9 @@ das Schwimmbad,A1,Noun
 der See,A1,Noun
 die Sekunde,A1,Noun
 der September,A1,Noun
-die Sieben,A1,Noun
+sieben,A1,Number
+siebzehn,A1,Number
+siebzig,A1,Number
 das Sofa,A1,Noun
 der Sohn,A1,Noun
 der Sommer,A1,Noun
@@ -641,7 +654,7 @@ die Zeitung,A1,Noun
 die Zigarette,A1,Noun
 das Zimmer,A1,Noun
 der Zoll,A1,Noun
-die Zwölf,A1,Noun
+zwölf,A1,Number
 abschließen,A2,Verb
 ändern,A2,Verb
 anmelden,A2,Verb
