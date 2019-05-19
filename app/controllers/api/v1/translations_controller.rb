@@ -14,6 +14,8 @@ class Api::V1::TranslationsController < ApplicationController
       {
         id: translation.id,
         german: translation.word.german,
+        article: translation.word.article,
+        plural: translation.word.plural,
         translation: translation.translation,
         example: translation.example,
       }
@@ -28,6 +30,7 @@ class Api::V1::TranslationsController < ApplicationController
         id: translation.id,
         word_id: translation.word_id,
         german: translation.word.german,
+        article: translation.word.article,
         translation: translation.translation,
         learnt: translation.learnt,
         level: translation.level,

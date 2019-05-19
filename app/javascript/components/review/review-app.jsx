@@ -31,10 +31,18 @@ export default class ReviewApp extends React.Component {
     this.setState({ review: event.target.value });
   };
 
+  fullWord = (translation) => {
+    if (translation.article) {
+      return translation.article + ' ' + translation.german;
+    } else {
+      return translation.german;
+    }
+  }
+
   onTranslated = (event) => {
     event.preventDefault();
 
-    const wrong = this.state.review != this.state.currentTranslation.german;
+    const wrong = this.state.review != this.fullWord(this.state.currentTranslation);
     if (wrong) {
       this.setState({ wrong: true });
     } else {
@@ -71,7 +79,7 @@ export default class ReviewApp extends React.Component {
     return (
       <div className="alert alert-danger" role="alert">
         <div>You are wrong!</div>
-        <div>{this.state.currentTranslation.german}</div>
+        <div>{this.fullWord(this.state.currentTranslation)}</div>
         <div>{this.state.currentTranslation.example}</div>
       </div>
     );
