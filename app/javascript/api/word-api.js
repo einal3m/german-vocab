@@ -5,11 +5,13 @@ export const getWords = (searchText, callback) => {
     .then((words) => callback(words));
 };
 
-export const getAllWords = (callback) => {
-  fetch(`/api/v1/words`)
-    .then((response) => {return response.json()})
-    .then((words) => callback(words));
+export const getAllWords = () => {
+  return fetch(`/api/v1/words`)
+    .then((response) => response.json());
 };
+//     }, err => {
+//         dispatch(loginFailure(err));
+//     });
 
 export const getWord = (id, callback) => {
   fetch(`/api/v1/words/${id}`)

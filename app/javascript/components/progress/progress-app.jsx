@@ -3,22 +3,24 @@ import Spinner from '../common/spinner';
 import ProgressTable from './progress-table';
 import { Link } from 'react-router-dom';
 
-import { getAllWords } from '../../api/word-api';
 import { getProgress } from '../../api/translation-api';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchWords } from '../../store/word-actions';
+import { fetchTranslations } from '../../store/translation-actions';
+import { filteredProgresses } from '../../store/progress-selector';
+import { loading } from '../../store/loading-selector';
 
 import './progress.css';
 
 class ProgressApp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true };
   }
 
   componentDidMount() {
-    getProgress((translations) => {
-      this.setState({ translations: translations, loading: false })
-    });
+    this.props.fetchWords();
+    this.props.fetchTranslations();
   }
 
   handleReviewNowClick = () => {
@@ -35,7 +37,7 @@ class ProgressApp extends React.Component {
   };
 
   render = () => {
-    if (this.state.loading) {
+    if (this.props.loading) {
       return <Spinner />;
     }
 
@@ -43,7 +45,7 @@ class ProgressApp extends React.Component {
       <div className="row">
         <div className="col-lg-8">
           <h1>Progress</h1>
-          <ProgressTable translations={this.state.translations}/>
+          <ProgressTable progresses={this.props.progresses}/>
         </div>
         <div className="col-lg-4">
           {this.renderReviewNav()}
@@ -61,4 +63,16 @@ class ProgressApp extends React.Component {
   };
 }
 
-export default withRouter(ProgressApp);
+const mapStateToProps = (state) => {
+  return {
+    progresses: filteredProgresses(state),
+    loading: loading(state),
+  }
+}
+
+const mapDispatchToProps = { fetchWords, fetchTranslations }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ProgressApp));

@@ -14,15 +14,15 @@ const ProgressTable = (props) => {
         </tr>
       </thead>
       <tbody>
-        {renderRows(props.translations)}
+        {renderRows(props.progresses)}
       </tbody>
     </table>
   );
 }
 
-const renderRows = (translations) => {
-  return translations.map(translation => (
-    <ProgressRow key={translation.id} translation={translation} />
+const renderRows = (progresses) => {
+  return progresses.map(progress => (
+    <ProgressRow key={progress.wordId} progress={progress} />
   )); 
 };
 

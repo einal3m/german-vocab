@@ -1,6 +1,5 @@
 import React from 'react';
 import Spinner from '../common/spinner';
-import { getAllWords } from '../../api/word-api';
 import { getTranslationsForReview } from '../../api/translation-api';
 import { postReview } from '../../api/review-api';
 

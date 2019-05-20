@@ -8,7 +8,7 @@ const ProgressRow = (props) => {
     let { history } = props;
 
     history.push({
-      pathname: `/edit/${props.translation.word_id}`,
+      pathname: `/edit/${props.progress.wordId}`,
     });
   };
 
@@ -16,21 +16,21 @@ const ProgressRow = (props) => {
     return new Date(date).toLocaleDateString("en-EN", {month: "short", day: "2-digit", year: "numeric"});
   };
 
-  const fullWord = (translation) => {
-    if (translation.article) {
-      return translation.article + ' ' + translation.german;
+  const fullWord = (progress) => {
+    if (progress.article) {
+      return progress.article + ' ' + progress.german;
     } else {
-      return translation.german;
+      return progress.german;
     }
   }
   
   return (
-    <tr key={props.translation.id} onClick={onRowClick}>  
-      <td className="german">{fullWord(props.translation)}</td>
-      <td className="level"><Gauge level={props.translation.level} /></td>
-      <td className="review-count">{props.translation.review_count}</td>
-      <td className="last-review">{formatDate(props.translation.last_review)}</td>
-      <td className="learnt"><YesNo yes={props.translation.learnt} /></td>
+    <tr onClick={onRowClick}>
+      <td className="german">{fullWord(props.progress)}</td>
+      <td className="level"><Gauge level={props.progress.level} /></td>
+      <td className="review-count">{props.progress.review_count}</td>
+      <td className="last-review">{formatDate(props.progress.last_review)}</td>
+      <td className="learnt"><YesNo yes={props.progress.learnt} /></td>
     </tr>
   );
 }

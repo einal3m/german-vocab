@@ -42,11 +42,7 @@ export default class EditApp extends React.Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    
-    const translation = this.state.translation;
-    translation.seen = true;
-
-    saveTranslation(translation);
+    saveTranslation(this.state.translation);
   };
 
   renderHelpLink() {

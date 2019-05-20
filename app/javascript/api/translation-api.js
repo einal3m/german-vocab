@@ -1,14 +1,13 @@
 
+export const getAllTranslations = (userId) => {
+  return fetch(`/api/v1/translations?user_id=${userId}`)
+    .then((response) => response.json());
+};
+
 export const getTranslation = (word_id, callback) => {
   fetch(`/api/v1/translations?word_id=${word_id}`)
     .then((response) => {return response.json()})
     .then((translations) => callback(translations[0] || defaultTranslation(word_id)));
-};
-
-export const getAllTranslations = (callback) => {
-  fetch(`/api/v1/translations?user_id=1`)
-    .then((response) => {return response.json()})
-    .then((translations) => callback(translations));
 };
 
 const defaultTranslation = (word_id) => {
@@ -17,9 +16,7 @@ const defaultTranslation = (word_id) => {
     user_id: 1,
     translation: '',
     example: '',
-    seen: false,
     known: false,
-    count: 0,
   };
 };
 
