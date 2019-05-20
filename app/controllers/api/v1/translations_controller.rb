@@ -65,7 +65,7 @@ class Api::V1::TranslationsController < ApplicationController
   private
 
   def translation_params
-    params.require(:translation).permit(:id, :word_id, :user_id, :translation, :example, :seen, :known, :count)
+    params.require(:translation).permit(:id, :word_id, :user_id, :translation, :example, :known)
   end
 
   def index_params

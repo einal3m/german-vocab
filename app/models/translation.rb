@@ -1,10 +1,8 @@
 class Translation < ApplicationRecord
   # user: foreign key
   # word: foreign key
-  # seen: boolean
   # translation: string
   # example: text
-  # count: integer
   # known: boolean
 
   belongs_to :user

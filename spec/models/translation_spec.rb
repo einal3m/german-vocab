@@ -5,9 +5,9 @@ RSpec.describe Translation, type: :model do
     it 'is invalid if there is already a translation for a specific user and word'do
       word = Word.create(german: 'eins')
       user = User.create(name: 'me')
-      translation = Translation.create(user: user, word: word, seen: true)
+      translation = Translation.create(user: user, word: word)
 
-      duplicate_translation = Translation.new(user: user, word: word, seen: false)
+      duplicate_translation = Translation.new(user: user, word: word)
       expect(duplicate_translation.valid?).to be_falsey
     end
   end
@@ -17,8 +17,8 @@ RSpec.describe Translation, type: :model do
       word = Word.create(german: 'eins')
       other_word = Word.create(german: 'zwei')
       user = User.create(name: 'me')
-      translation = Translation.create(user: user, word: word, seen: true)
-      Translation.create(user: user, word: other_word, seen: false)
+      translation = Translation.create(user: user, word: word)
+      Translation.create(user: user, word: other_word)
 
       result = Translation.search(word.id, user.id)
       expect(result).to eq([translation])
