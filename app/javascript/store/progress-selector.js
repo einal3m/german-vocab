@@ -30,6 +30,7 @@ const progress = (word, translation) => {
     german: word.german,
     article: word.article,
     translation: translation.translation,
+    example: translation.example,
     learnt: translation.learnt,
     level: translation.level,
     reviewCount: translation.review_count,

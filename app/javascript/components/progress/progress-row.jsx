@@ -13,7 +13,11 @@ const ProgressRow = (props) => {
   };
 
   const formatDate = (date) => {
-    return new Date(date).toLocaleDateString("en-EN", {month: "short", day: "2-digit", year: "numeric"});
+    if (!!date) {
+      return new Date(date).toLocaleDateString("en-EN", {month: "short", day: "2-digit", year: "numeric"});
+    } else {
+      return '';
+    }
   };
 
   const fullWord = (progress) => {
@@ -23,13 +27,16 @@ const ProgressRow = (props) => {
       return progress.german;
     }
   }
-  
+
   return (
     <tr onClick={onRowClick}>
-      <td className="german">{fullWord(props.progress)}</td>
+      <td>
+        <div className="german">{fullWord(props.progress)}</div>
+        <div className="example">{props.progress.example}</div>
+      </td>
       <td className="level"><Gauge level={props.progress.level} /></td>
-      <td className="review-count">{props.progress.review_count}</td>
-      <td className="last-review">{formatDate(props.progress.last_review)}</td>
+      <td className="review-count">{props.progress.reviewCount}</td>
+      <td className="last-review">{formatDate(props.progress.lastReview)}</td>
       <td className="learnt"><YesNo yes={props.progress.learnt} /></td>
     </tr>
   );

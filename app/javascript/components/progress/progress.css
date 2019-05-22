@@ -6,17 +6,23 @@
   padding: 5px 12px;
 }
 
-td.german {
+td .german {
   font-size: 16px;
+}
+
+td .example {
+  font-size: 12px;
 }
 
 th.level, td.level {
   text-align: center;
+  vertical-align: middle;
 }
 
 th.learnt, td.learnt {
   width: 10%;
   text-align: center;
+  vertical-align: middle;
 }
 
 th.last-review, td.last-review {
@@ -30,4 +36,5 @@ th.review-count, td.review-count {
   width: 10%;
   font-size: 12px;
   text-align: center;
+  vertical-align: middle;
 }

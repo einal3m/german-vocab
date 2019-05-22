@@ -1,10 +1,19 @@
 class Api::V1::TranslationsController < ApplicationController
   def index
-    if index_params[:word_id].nil?
-      render json: Translation.where(user_id: index_params[:user_id])
-    else
-      render json: Translation.search(index_params[:word_id], 1)
+    translations = Translation.where(user_id: index_params[:user_id]).map do |translation|
+      {
+        id: translation.id,
+        word_id: translation.word_id,
+        translation: translation.translation,
+        example: translation.example,
+        learnt: translation.learnt,
+        level: translation.level,
+        review_count: translation.review_count,
+        last_review: translation.last_review
+      }
     end
+
+    render json: translations
   end
 
   def review
@@ -28,9 +37,6 @@ class Api::V1::TranslationsController < ApplicationController
     progress = Translation.where(user_id: index_params[:user_id]).map do |translation|
       {
         id: translation.id,
-        word_id: translation.word_id,
-        german: translation.word.german,
-        article: translation.word.article,
         translation: translation.translation,
         learnt: translation.learnt,
         level: translation.level,
