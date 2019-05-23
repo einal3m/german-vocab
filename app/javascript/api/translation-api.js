@@ -4,20 +4,9 @@ export const getAllTranslations = (userId) => {
     .then((response) => response.json());
 };
 
-export const getTranslation = (word_id, callback) => {
-  fetch(`/api/v1/translations?word_id=${word_id}`)
-    .then((response) => {return response.json()})
-    .then((translations) => callback(translations[0] || defaultTranslation(word_id)));
-};
-
-const defaultTranslation = (word_id) => {
-  return {
-    word_id: word_id,
-    user_id: 1,
-    translation: '',
-    example: '',
-    known: false,
-  };
+export const getTranslation = (userId, wordId) => {
+  return fetch(`/api/v1/translations/edit?user_id=${userId}&word_id=${wordId}`)
+    .then((response) => response.json());
 };
 
 export const getProgress = (callback) => {

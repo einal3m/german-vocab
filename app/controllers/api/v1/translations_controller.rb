@@ -16,6 +16,12 @@ class Api::V1::TranslationsController < ApplicationController
     render json: translations
   end
 
+  def edit
+    translation = Translation.where(user_id: index_params[:user_id], word_id: index_params[:word_id]).first
+
+    render json: translation
+  end
+
   def review
     translations = Translation.where(user_id: 1).reject do |translation|
       translation.learnt

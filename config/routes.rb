@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :translations, only: [:index, :create, :update] do
         resources :reviews, only: [:create]
         collection do
+          get 'edit'
           get 'progress'
           get 'review'
         end

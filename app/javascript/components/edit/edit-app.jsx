@@ -1,22 +1,26 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { getWord } from '../../api/word-api';
 import { getTranslation, saveTranslation } from '../../api/translation-api';
+import { fetchTranslation } from '../../store/translation-actions';
+import { fetchWords } from '../../store/word-actions';
+import { storeWordId } from '../../store/edit-translation-reducer';
+import { wordForEditTranslation } from '../../store/edit-translation-selector';
+import { loading } from '../../store/loading-selector';
 import Spinner from '../common/spinner';
 import './edit-app.css';
 
-export default class EditApp extends React.Component {
+class EditApp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true };
   }
 
   componentDidMount() {
-    getWord(this.props.match.params.id, (word) => {
-      this.setState({ word: word, loading: !this.state.translation });
-    });
-    getTranslation(this.props.match.params.id, (translation) => {
-      this.setState({ translation: translation, loading: !this.state.word })
-    });
+    const wordId = this.props.match.params.id;
+
+    this.props.fetchWords();
+    this.props.fetchTranslation(wordId);
+    this.props.storeWordId(wordId);
   }
 
   onChangeTranslation = (event) => {
@@ -45,6 +49,10 @@ export default class EditApp extends React.Component {
     saveTranslation(this.state.translation);
   };
 
+  loading = () => {
+    return !this.props.translation || !this.props.word;
+  }
+
   renderHelpLink() {
     return (
       <a href={`https://dictionary.cambridge.org/dictionary/german-english/${this.state.word.german}`}>the Campbridge Dictionary</a>
@@ -52,9 +60,11 @@ export default class EditApp extends React.Component {
   }
 
   render = () => {
-    if (this.state.loading) {
+    if (this.loading()) {
       return <Spinner />;
     }
+
+    return <div>Edit App</div>;
 
     return (
       <div>
@@ -108,3 +118,17 @@ export default class EditApp extends React.Component {
     );
   };
 }
+
+const mapStateToProps = (state) => {
+  return {
+    translation: state.editTranslation.translation,
+    word: wordForEditTranslation(state),
+  }
+}
+
+const mapDispatchToProps = { fetchWords, fetchTranslation, storeWordId }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditApp);
