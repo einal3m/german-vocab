@@ -9,6 +9,7 @@ import { fetchWords } from '../../store/word-actions';
 import { storeWordId } from '../../store/edit-translation-reducer';
 import { wordForEditTranslation } from '../../store/edit-translation-selector';
 import { loading } from '../../store/loading-selector';
+import { fullWord } from '../common/format';
 
 import './edit-app.css';
 
@@ -40,10 +41,22 @@ class EditApp extends React.Component {
     }
 
     return (
-      <form>
-        <EditTranslationForm word={this.props.word} translation={this.props.translation} />
-        <button onClick={this.onSubmit} className="btn btn-primary">Save</button>
-      </form> 
+      <div className="row">
+        <div className="col-sm-6 offset-sm-3">
+          <h1>Translate</h1>
+          <div className="card">
+            <h5 className="card-header">{fullWord(this.props.word)}</h5>
+            <div className="card-body">
+              <form>
+                <EditTranslationForm word={this.props.word} translation={this.props.translation} />
+              </form> 
+            </div>
+            <div className="card-footer">
+              <button id="my-button" onClick={this.onSubmit} className="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   };
 }
