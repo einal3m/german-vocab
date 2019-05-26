@@ -2,6 +2,7 @@ import React from 'react';
 import Gauge from '../common/gauge';
 import YesNo from './yes-no.jsx';
 import { withRouter } from 'react-router-dom';
+import { fullWord, displayDate } from '../common/format';
 
 const ProgressRow = (props) => {
   const onRowClick = () => {
@@ -12,22 +13,6 @@ const ProgressRow = (props) => {
     });
   };
 
-  const formatDate = (date) => {
-    if (!!date) {
-      return new Date(date).toLocaleDateString("en-EN", {month: "short", day: "2-digit", year: "numeric"});
-    } else {
-      return '';
-    }
-  };
-
-  const fullWord = (progress) => {
-    if (progress.article) {
-      return progress.article + ' ' + progress.german;
-    } else {
-      return progress.german;
-    }
-  }
-
   return (
     <tr onClick={onRowClick}>
       <td>
@@ -36,7 +21,7 @@ const ProgressRow = (props) => {
       </td>
       <td className="level"><Gauge level={props.progress.level} /></td>
       <td className="review-count">{props.progress.reviewCount}</td>
-      <td className="last-review">{formatDate(props.progress.lastReview)}</td>
+      <td className="last-review">{displayDate(props.progress.lastReview)}</td>
       <td className="learnt"><YesNo yes={props.progress.learnt} /></td>
     </tr>
   );
