@@ -17,9 +17,13 @@ class Api::V1::TranslationsController < ApplicationController
   end
 
   def edit
-    translation = Translation.where(user_id: index_params[:user_id], word_id: index_params[:word_id]).first
+    translation = Translation.where(user_id: user_id, word_id: word_id).first
 
-    render json: translation
+    if translation
+      render json: serialize_translation(translation)
+    else
+      render json: default_translation
+    end
   end
 
   def review
@@ -58,7 +62,7 @@ class Api::V1::TranslationsController < ApplicationController
     translation = Translation.new(translation_params)
   
     if translation.save
-      render :json => translation, :status => 201
+      render :json => serialize_translation(translation), :status => 201
     else
       render :json => { :errors => translation.errors.full_messages }, :status => 422
     end
@@ -68,13 +72,42 @@ class Api::V1::TranslationsController < ApplicationController
     translation = Translation.find(translation_params[:id])
 
     if translation.update_attributes(translation_params)
-      render :json => translation
+      render :json => serialize_translation(translation)
     else
       render :json => { :errors => translation.errors.full_messages }, :status => 422
     end
   end
 
   private
+
+  def default_translation
+    {
+      user_id: user_id,
+      word_id: word_id,
+      translation: '',
+      example: '',
+      known: false
+    }
+  end
+
+  def serialize_translation(translation)
+    {
+      id: translation.id,
+      user_id: translation.user_id,
+      word_id: translation.word_id,
+      translation: translation.translation,
+      example: translation.example,
+      known: translation.known
+    }
+  end
+
+  def user_id
+    @user_id = index_params[:user_id]
+  end
+
+  def word_id
+    @user_id = index_params[:word_id]
+  end
 
   def translation_params
     params.require(:translation).permit(:id, :word_id, :user_id, :translation, :example, :known)

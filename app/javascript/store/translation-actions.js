@@ -1,28 +1,34 @@
-import { getAllTranslations, getTranslation } from '../api/translation-api';
+import store from './store';
+import { getAllTranslations, getTranslation, putTranslation, postTranslation } from '../api/translation-api';
 import { startLoading, finishedLoading } from './loading-reducer';
 import { storeTranslations } from './translations-reducer';
-import { storeTranslation, storeDefaultTranslation } from './edit-translation-reducer';
+import { storeTranslation } from './edit-translation-reducer';
 
 export const fetchTranslations = () => dispatch => {
-  startLoading('translations');
+  dispatch(startLoading('translations'));
   const userId = 1;
 
   getAllTranslations(userId).then(translations => {
     dispatch(storeTranslations(translations));
-    finishedLoading('translations');
+    dispatch(finishedLoading('translations'));
   });
 };
 
 export const fetchTranslation = (wordId) => dispatch => {
-  startLoading('translation');
+  dispatch(startLoading('translation'));
   const userId = 1;
 
   getTranslation(userId, wordId).then(translation => {
-    if (!!translation) {
-      dispatch(storeTranslation(translation));
-    } else {
-      dispatch(storeDefaultTranslation({ userId: userId, wordId: wordId}));
-    }
-    finishedLoading('translation');
+    dispatch(storeTranslation(translation));
+    dispatch(finishedLoading('translation'));
+  });
+};
+
+export const saveTranslation = () => dispatch => {
+  const translation = store.getState().editTranslation.translation;
+  const action = translation.id ? putTranslation : postTranslation;
+
+  action(translation).then(translation => {
+    dispatch(storeTranslation(translation));
   });
 };

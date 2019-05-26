@@ -1,12 +1,18 @@
 
 export const getAllTranslations = (userId) => {
-  return fetch(`/api/v1/translations?user_id=${userId}`)
-    .then((response) => response.json());
+  const url = `/api/v1/translations?user_id=${userId}`;
+  console.log(`GET ${url}`);
+
+  return fetch(url)
+    .then(response => response.json());
 };
 
 export const getTranslation = (userId, wordId) => {
-  return fetch(`/api/v1/translations/edit?user_id=${userId}&word_id=${wordId}`)
-    .then((response) => response.json());
+  const url = `/api/v1/translations/edit?user_id=${userId}&word_id=${wordId}`;
+  console.log(`GET ${url}`);
+
+  return fetch(url)
+    .then(response => response.json());
 };
 
 export const getProgress = (callback) => {
@@ -21,30 +27,20 @@ export const getTranslationsForReview = (callback) => {
     .then((translations) => callback(translations));
 };
 
-export const saveTranslation = (translation) => {
-  if (translation.id) {
-    putTranslation(translation);
-  } else {
-    postTranslation(translation);
-  }
-}
-
-const putTranslation = (translation) => {
+export const putTranslation = (translation) => {
   const body = JSON.stringify({ translation: translation });
+  const url = `/api/v1/translations/${translation.id}`;
+  console.log(`PUT ${url}`);
 
-  console.log('putTranslation');
-  console.log(body);
-
-  fetch(`/api/v1/translations/${translation.id}`, { method: 'put', headers: { "Content-Type": "application/json" }, body: body })
-    .then((response) => { console.log(response) })
+  return fetch(url, { method: 'put', headers: { "Content-Type": "application/json" }, body: body })
+    .then(response => response.json());
 };
 
-const postTranslation = (translation) => {
+export const postTranslation = (translation) => {
   const body = JSON.stringify({ translation: translation });
+  const url = '/api/v1/translations';
+  console.log(`POST ${url}`);
 
-  console.log('postTranslation');
-  console.log(body);
-
-  fetch('/api/v1/translations', { method: 'post', headers: { "Content-Type": "application/json" }, body: body })
-    .then((response) => { console.log(response) })
+  return fetch(url, { method: 'post', headers: { "Content-Type": "application/json" }, body: body })
+    .then(response => response.json());
 };

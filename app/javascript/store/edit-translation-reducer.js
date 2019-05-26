@@ -5,22 +5,11 @@ const editTranslationSlice = createSlice({
   reducers: {
     storeWordId(state, action) { state.wordId = action.payload },
     storeTranslation(state, action) { state.translation = action.payload },
-    storeDefaultTranslation(state, action) { 
-      state.translation = defaultTranslation(action.payload.userId, action.payload.wordId) 
-    },
+    toggleKnown(state, action) { state.translation.known = !state.translation.known },
+    changeField(state, action) { state.translation[action.payload.field] = action.payload.value },
   },
 });
 
-const defaultTranslation = (userId, wordId) => {
-  return {
-    word_id: wordId,
-    user_id: userId,
-    translation: '',
-    example: '',
-    known: false,
-  };
-};
-
 const { actions, reducer } = editTranslationSlice;
-export const { storeTranslation, storeWordId, storeDefaultTranslation } = actions;
+export const { storeTranslation, storeWordId, toggleKnown, changeField } = actions;
 export default reducer;

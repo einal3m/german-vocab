@@ -6,12 +6,11 @@ export const getWords = (searchText, callback) => {
 };
 
 export const getAllWords = () => {
+  console.log('GET /api/v1/words');
+
   return fetch(`/api/v1/words`)
     .then((response) => response.json());
 };
-//     }, err => {
-//         dispatch(loginFailure(err));
-//     });
 
 export const getWord = (id, callback) => {
   fetch(`/api/v1/words/${id}`)
