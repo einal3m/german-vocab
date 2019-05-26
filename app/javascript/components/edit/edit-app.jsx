@@ -7,7 +7,7 @@ import EditTranslationForm from './edit-translation-form';
 import { fetchTranslation, saveTranslation } from '../../store/translation-actions';
 import { fetchWords } from '../../store/word-actions';
 import { storeWordId } from '../../store/edit-translation-reducer';
-import { wordForEditTranslation } from '../../store/edit-translation-selector';
+import { wordForEditTranslation, hasEdits } from '../../store/edit-translation-selector';
 import { loading } from '../../store/loading-selector';
 import { fullWord } from '../common/format';
 
@@ -35,6 +35,16 @@ class EditApp extends React.Component {
     return this.props.loading || !this.props.translation || !this.props.word;
   }
 
+  renderSaving = () => {
+    if (this.props.saving) {
+      return (
+        <small className="text-muted">Saving...</small>
+      );
+    }
+
+    return ''
+  }
+
   render = () => {
     if (this.loading()) {
       return <Spinner />;
@@ -52,7 +62,8 @@ class EditApp extends React.Component {
               </form> 
             </div>
             <div className="card-footer">
-              <button id="my-button" onClick={this.onSubmit} className="btn btn-primary">Save</button>
+              <button disabled={this.props.hasEdits} onClick={this.onSubmit} className="btn btn-primary">Save</button>
+              {this.renderSaving()}
             </div>
           </div>
         </div>
@@ -66,6 +77,8 @@ const mapStateToProps = (state) => {
     translation: state.editTranslation.translation,
     word: wordForEditTranslation(state),
     loading: loading(state),
+    hasEdits: hasEdits(state),
+    saving: state.editTranslation.saving,
   }
 }
 
