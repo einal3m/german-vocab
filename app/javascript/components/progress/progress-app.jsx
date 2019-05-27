@@ -1,6 +1,7 @@
 import React from 'react';
 import Spinner from '../common/spinner';
 import ProgressTable from './progress-table';
+import WordSearch from './word-search';
 import { Link } from 'react-router-dom';
 
 import { getProgress } from '../../api/translation-api';
@@ -44,7 +45,14 @@ class ProgressApp extends React.Component {
     return(
       <div className="row">
         <div className="col-lg-8">
-          <h1>Progress</h1>
+          <div className="row align-items-center">
+            <div className="col-sm-4">
+              <h1>Progress</h1>
+            </div>
+            <div className="col-sm-8">
+              <WordSearch />
+            </div>
+          </div>
           <ProgressTable progresses={this.props.progresses}/>
         </div>
         <div className="col-lg-4">

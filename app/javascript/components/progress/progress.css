@@ -38,3 +38,12 @@ th.review-count, td.review-count {
   text-align: center;
   vertical-align: middle;
 }
+
+.search-form {
+  text-align: right;
+  vertical-align: middle;
+}
+
+.search-form button {
+  margin-left: 10px;
+}

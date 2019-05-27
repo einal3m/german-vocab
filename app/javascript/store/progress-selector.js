@@ -12,10 +12,15 @@ export const allProgresses = createSelector(
 );
 
 export const filteredProgresses = createSelector(
-  [allProgresses],
-  (progresses) => {
-    // all translated:
-    return progresses.filter(progress => !!progress.translation);
+  [allProgresses, 'search.filter', 'search.searchText'],
+  (progresses, filter, searchText) => {
+    if (filter == 'text') {
+      return progresses.filter(progress => progress.german.toLowerCase().includes(searchText.toLowerCase()));
+    } else if (filter == 'translated') {
+      return progresses.filter(progress => !!progress.translation);
+    } else {
+      return [];
+    }
   }
 );
 

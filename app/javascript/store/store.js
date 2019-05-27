@@ -1,15 +1,17 @@
 import { configureStore } from 'redux-starter-kit';
 import wordsReducer from './words-reducer';
 import translationsReducer from './translations-reducer';
-import editTranslationSlice from './edit-translation-reducer';
+import editTranslationReducer from './edit-translation-reducer';
 import loadingReducer from './loading-reducer';
+import searchReducer from './search-reducer';
 
 const store = configureStore({
   reducer: {
     words: wordsReducer,
     translations: translationsReducer,
-    editTranslation: editTranslationSlice,
+    editTranslation: editTranslationReducer,
     loading: loadingReducer,
+    search: searchReducer,
   }
 });
 

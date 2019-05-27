@@ -6,10 +6,10 @@ import store from './store';
 export const fetchWords = () => dispatch => {
   if (store.getState().words.length > 0) return;
 
-  startLoading('words');
+  dispatch(startLoading('words'));
 
   getAllWords().then((words) => {
     dispatch(storeWords(words));
-    finishedLoading('words');
+    dispatch(finishedLoading('words'));
   });
 };
