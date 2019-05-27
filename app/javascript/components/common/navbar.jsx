@@ -16,9 +16,6 @@ export default class Menu extends React.Component {
               <Link className="nav-link" to={`/progress`}>Progress</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to={`/words`}>Find a word</Link>
-            </li>
-            <li className="nav-item">
               <Link className="nav-link" to={`/users`}>Create Users</Link>
             </li>
             <li className="nav-item">
