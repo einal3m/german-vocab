@@ -12,20 +12,22 @@
 
 ActiveRecord::Schema.define(version: 2019_05_19_043958) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "reviews", force: :cascade do |t|
     t.boolean "correct"
-    t.integer "translation_id"
+    t.bigint "translation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["translation_id"], name: "index_reviews_on_translation_id"
   end
 
   create_table "translations", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "word_id"
+    t.bigint "user_id"
+    t.bigint "word_id"
     t.string "translation"
     t.text "example"
-    t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "known"
@@ -50,4 +52,5 @@ ActiveRecord::Schema.define(version: 2019_05_19_043958) do
     t.string "plural"
   end
 
+  add_foreign_key "reviews", "translations"
 end
