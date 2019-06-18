@@ -8,9 +8,14 @@ const searchSlice = createSlice({
       state.filter = 'text';
       state.searchText = state.editSearchText;
     },
+    clearTextSearch(state, action) {
+      state.filter = 'translated';
+      state.searchText = '';
+      state.editSearchText = '';
+    }
   },
 });
 
 const { actions, reducer } = searchSlice;
-export const { changeSearchText, startTextSearch } = actions;
+export const { changeSearchText, startTextSearch, clearTextSearch } = actions;
 export default reducer;

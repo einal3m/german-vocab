@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { changeSearchText, startTextSearch } from '../../store/search-reducer';
+import { changeSearchText, startTextSearch, clearTextSearch } from '../../store/search-reducer';
 
 const WordSearch = (props) => {
 
@@ -14,9 +14,15 @@ const WordSearch = (props) => {
     props.startTextSearch();
   };
 
+  const onClear = () => {
+    props.clearTextSearch();
+  };
+
+  const formClearClass = props.searchText != '' ? '' : 'd-none';
+
   return (
     <form className="search-form form-inline float-lg-right">
-      <div className="form-group">
+      <div className="form-group position-relative">
         <input 
           type="text" 
           className="form-control" 
@@ -25,6 +31,7 @@ const WordSearch = (props) => {
           value={props.searchText}
           onChange={onChange}
         />
+        <span class={`form-clear ${formClearClass}`} onClick={onClear}>&#x2715;</span>
       </div>
       <button className="btn btn-primary" onClick={onSubmit}>&#x1F50E;</button>
     </form>
@@ -37,7 +44,7 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = { changeSearchText, startTextSearch };
+const mapDispatchToProps = { changeSearchText, startTextSearch, clearTextSearch };
 
 export default connect(
   mapStateToProps,
