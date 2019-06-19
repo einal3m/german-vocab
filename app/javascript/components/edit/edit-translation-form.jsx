@@ -17,7 +17,7 @@ const EditTranslationForm = (props) => {
 
   const renderHelpLink = () => {
     return (
-      <a href={`https://dictionary.cambridge.org/dictionary/german-english/${props.word.german}`}>the Campbridge Dictionary</a>
+      <a href={`https://dictionary.cambridge.org/dictionary/german-english/${props.word.german}`} target="_blank">the Campbridge Dictionary</a>
     );
   };
 
