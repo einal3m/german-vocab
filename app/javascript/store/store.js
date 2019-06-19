@@ -4,6 +4,7 @@ import translationsReducer from './translations-reducer';
 import editTranslationReducer from './edit-translation-reducer';
 import loadingReducer from './loading-reducer';
 import searchReducer from './search-reducer';
+import pageReducer from './page-reducer';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     editTranslation: editTranslationReducer,
     loading: loadingReducer,
     search: searchReducer,
+    page: pageReducer,
   }
 });
 

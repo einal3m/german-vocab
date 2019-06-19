@@ -2,6 +2,7 @@ import React from 'react';
 import Spinner from '../common/spinner';
 import ProgressTable from './progress-table';
 import WordSearch from './word-search';
+import PageNav from './page-nav';
 import { Link } from 'react-router-dom';
 
 import { getProgress } from '../../api/translation-api';
@@ -9,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchWords } from '../../store/word-actions';
 import { fetchTranslations } from '../../store/translation-actions';
-import { filteredProgresses } from '../../store/progress-selector';
+import { pageOfProgresses } from '../../store/progress-selector';
 import { loading } from '../../store/loading-selector';
 
 import './progress.css';
@@ -53,6 +54,7 @@ class ProgressApp extends React.Component {
               <WordSearch />
             </div>
           </div>
+          <PageNav />
           <ProgressTable progresses={this.props.progresses}/>
         </div>
         <div className="col-lg-4">
@@ -73,7 +75,7 @@ class ProgressApp extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    progresses: filteredProgresses(state),
+    progresses: pageOfProgresses(state),
     loading: loading(state),
   }
 }

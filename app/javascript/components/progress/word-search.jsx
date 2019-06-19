@@ -31,7 +31,7 @@ const WordSearch = (props) => {
           value={props.searchText}
           onChange={onChange}
         />
-        <span class={`form-clear ${formClearClass}`} onClick={onClear}>&#x2715;</span>
+        <span className={`form-clear ${formClearClass}`} onClick={onClear}>&#x2715;</span>
       </div>
       <button className="btn btn-primary" onClick={onSubmit}>&#x1F50E;</button>
     </form>

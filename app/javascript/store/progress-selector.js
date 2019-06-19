@@ -1,5 +1,7 @@
 import { createSelector } from "redux-starter-kit";
 
+const WORDS_PER_PAGE = 20.0;
+
 export const allProgresses = createSelector(
   ['words', 'translations'],
   (words, translations) => {
@@ -21,6 +23,21 @@ export const filteredProgresses = createSelector(
     } else {
       return [];
     }
+  }
+);
+
+export const pageOfProgresses = createSelector(
+  [filteredProgresses, 'page.pageNo'],
+  (progresses, pageNo) => {
+    const index = (pageNo - 1) * WORDS_PER_PAGE;
+    return progresses.slice(index, index + WORDS_PER_PAGE);
+  }
+);
+
+export const totalPages = createSelector(
+  [filteredProgresses],
+  (progresses) => {
+    return Math.ceil(progresses.length / WORDS_PER_PAGE);
   }
 );
 
