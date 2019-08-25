@@ -4,11 +4,21 @@ import Browser
 import Html exposing (Html, button, div, form, h1, input, label, small, text)
 import Html.Attributes exposing (class, for, id, required, type_, value)
 import Html.Attributes.Aria exposing (ariaDescribedby)
-import Html.Events exposing (onInput)
+import Html.Events exposing (onClick, onInput)
+import Http exposing (request)
+import Json.Encode as Encode
 
 
 
 -- TYPES
+
+
+type alias Flags =
+    { urls : Urls }
+
+
+type alias Urls =
+    { createUserUrl : String }
 
 
 type Msg
@@ -16,6 +26,8 @@ type Msg
     | SetEmail String
     | SetPassword String
     | SetPasswordConfirmation String
+    | SubmitForm
+    | HandleResponse (Result Http.Error ())
 
 
 type FormField
@@ -34,6 +46,7 @@ type alias Model =
     , email : String
     , password : String
     , passwordConfirmation : String
+    , urls : Urls
     }
 
 
@@ -41,12 +54,13 @@ type alias Model =
 -- INIT
 
 
-init : ( Model, Cmd Msg )
-init =
+init : Flags -> ( Model, Cmd Msg )
+init flags =
     ( { name = ""
       , email = ""
       , password = ""
       , passwordConfirmation = ""
+      , urls = flags.urls
       }
     , Cmd.none
     )
@@ -83,7 +97,7 @@ view model =
                             ]
                         ]
                     ]
-                , div [ class "card-footer" ] [ button [ class "btn btn-primary" ] [ text "Create Account" ] ]
+                , div [ class "card-footer" ] [ button [ class "btn btn-primary", onClick SubmitForm ] [ text "Create Account" ] ]
                 ]
             ]
         ]
@@ -96,12 +110,6 @@ view model =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case Debug.log "msg" msg of
-        --NoOp ->
-        --    ( model, Cmd.none )
-        --SubmitForm ->
-        --    ( { model | response = Nothing }
-        --    , Http.send Response (postRequest model)
-        --    )
         SetName name ->
             ( { model | name = name }, Cmd.none )
 
@@ -114,14 +122,42 @@ update msg model =
         SetPasswordConfirmation passwordConfirmation ->
             ( { model | passwordConfirmation = passwordConfirmation }, Cmd.none )
 
+        SubmitForm ->
+            ( model, postUser model )
+
+        HandleResponse _ ->
+            ( model, Cmd.none )
 
 
---SetPassword password ->
---    ( { model | password = password }, Cmd.none )
---Response (Ok response) ->
---    ( { model | response = Just response }, Cmd.none )
---Response (Err error) ->
---    ( { model | response = Just (toString error) }, Cmd.none )
+postUser : Model -> Cmd Msg
+postUser model =
+    Http.request
+        { method = "POST"
+        , headers = []
+        , url = model.urls.createUserUrl
+        , body = Http.jsonBody (postEncoder model)
+        , expect = Http.expectWhatever HandleResponse
+        , timeout = Nothing
+        , tracker = Nothing
+        }
+
+
+postEncoder : Model -> Encode.Value
+postEncoder model =
+    Encode.object
+        [ ( "user", userEncoder model ) ]
+
+
+userEncoder : Model -> Encode.Value
+userEncoder model =
+    Encode.object
+        [ ( "name", Encode.string model.name )
+        , ( "email", Encode.string model.email )
+        , ( "password", Encode.string model.password )
+        ]
+
+
+
 -- SUBSCRIPTIONS
 
 
@@ -134,10 +170,10 @@ subscriptions model =
 -- MAIN
 
 
-main : Program (Maybe {}) Model Msg
+main : Program Flags Model Msg
 main =
     Browser.element
-        { init = always init
+        { init = init
         , view = view
         , update = update
         , subscriptions = subscriptions

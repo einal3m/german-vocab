@@ -18,5 +18,5 @@ Rails.application.routes.draw do
 
   match '/', to: 'pages#index', via: :all
 
-  resources :users, only: [:index, :new]
+  resources :users, only: [:index, :new, :create]
 end
