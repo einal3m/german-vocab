@@ -7,6 +7,7 @@ gem 'rails'
 gem 'pg'
 gem 'puma'
 gem 'uglifier'
+gem 'bcrypt'
 gem 'webpacker'
 
 gem 'turbolinks'
