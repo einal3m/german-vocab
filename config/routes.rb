@@ -16,5 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-  match '*path', to: 'pages#index', via: :all
+  match '/', to: 'pages#index', via: :all
+
+  resources :users, only: [:index, :new]
 end
